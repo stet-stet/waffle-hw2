@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+    <title>Modify a Post</title>
+</head>
+<body>
+
+    <form action={%url 'board:read' blogpost.pk%} request="POST">
+        {%csrf_token%}s
+        <p>Subject</p> <input type="text" name="subject" class="TitleBox" value={{blogpost.subject}}><br>
+        <p>Password</p> <input type="text" name="password" class="SmallBox">
+        <p>Author</p> <input type="text" name="author" class="SmallBox" value={{blogpost.author}}><br>
+        <input type="text" name="content" class="ContentBox" value={{blogpost.text}}><br>
+        <input type="Submit"><br>
+    </form>
+    <pre>*the password and the subject must not exceed 150 letters. 
+          the author name must not exceed 50 letters.
+          Also, please use a new password, if possible. thank you!</pre>
+
+
+</body>

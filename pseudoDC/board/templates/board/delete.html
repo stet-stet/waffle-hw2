@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<head><title>Delete this page?</title></head>
+<body>
+    {%if blogpost.private %}
+        <p>this page is already private.</p>
+    {%else%}
+    <form action={%url 'board:deleteAction' blogpost.pk%}>
+        <p>Please type the password to delete this post.</p>
+        <input type="text" name="password">
+        <input type="submit">
+    </form>
+    {%endif%}
+</body>

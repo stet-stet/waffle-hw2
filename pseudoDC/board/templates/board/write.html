@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<head>
+    <title>Write a New Post</title>
+</head>
+<body>
+    <form method="POST">
+        {%csrf_token%}
+        <p>Subject</p> <input type="text" name="subject" style="max-width:60%; display:block;"><br>
+        <p>Password</p> <input type="text" name="password" style="width:40%; display:inline;">
+        <p>Author</p> <input type="text" name="author" style="width:40%; display:inline;"><br>
+        <input type="text" name="content" style="max-width:80%,max_height:40%"><br>
+        <input type="Submit"><br>
+    </form>
+    <pre>*the password and the subject must not exceed 150 letters. 
+          the author name must not exceed 50 letters. Thank you.</pre>
+
+
+</body>

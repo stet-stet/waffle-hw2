@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<head>
+    <title>pseudoDC: {{blogpost.subject}}</title>
+</head>
+<body>
+    {%if blogpost.private%}
+        <p> This post has been turned private! <p>
+    {%else%}
+        <p>Subject : {{blogpost.subject}} </p><br>
+        <p>Author : {{blogpost.author}}</p><br>
+        <p>
+        {{blogpost.text}}
+        </p><br>
+        <p>last modified : {{blogpost.last_modified}}</p>
+        <a href={%url 'board:update' blogpost.pk%}><button>Update</button></a>
+        <a href={%url 'board:delete' blogpost.pk%} target="0"><button>Delete</button></a>
+    {%endif%}
+
+</body>
