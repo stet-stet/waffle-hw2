@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.urls import reverse
 from django.views import generic
+from django.utils import timezone
 from .models import BlogPost
 
 
@@ -40,8 +41,36 @@ def Delete(http_request, post_id):
     B = get_object_or_404(BlogPost, pk=post_id)
     return render(http_request, 'board/delete.html', {"blogpost": B})
 
+# Queries
 
-def Delete_action(http_request, post_id):
+
+def PostBlogpostQuery(http_request):
+    B = Blogpost(
+        subject=http_request.POST['subject'],
+        text=http_request.POST['text'],
+        password=http_request.POST['password'],
+        author=http_request.POST['author'],
+        pub_date=timezone.now(),
+        last_modified=timezone.now(),
+        private=False
+    )
+    B.save()
+    return HttpResponseRedirect(reverse('board:read', args=(B.pk,)))
+
+
+def HandleUpdateQuery(http_request, post_id):
+    B = get_object_or_404(BlogPost, pk=post_id)
+    B.subject = http_request.POST['subject']
+    B.text = http_request.POST['text']
+    B.password = http_request.POST['password']
+    B.author = http_request.POST['author']
+    B.last_modified = timezone.now()
+    B.save()
+    return HttpResponseRedirect(reverse('board:read', args=(post_id,)))
+
+
+def HandleDeleteQuery(http_request, post_id):
     B = get_object_or_404(BlogPost, pk=post_id)
     B.private = True
+    B.save()
     return HttpResponseRedirect(reverse('board:index'))

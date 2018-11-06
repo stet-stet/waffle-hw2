@@ -4,12 +4,12 @@
 </head>
 <body>
 
-    <form action={%url 'board:read' blogpost.pk%} request="POST">
+    <form action={%url 'board:handleupdatequery' blogpost.pk%} method="POST">
         {%csrf_token%}s
         <p>Subject</p> <input type="text" name="subject" class="TitleBox" value={{blogpost.subject}}><br>
         <p>Password</p> <input type="text" name="password" class="SmallBox">
         <p>Author</p> <input type="text" name="author" class="SmallBox" value={{blogpost.author}}><br>
-        <input type="text" name="content" class="ContentBox" value={{blogpost.text}}><br>
+        <input type="text" name="text" class="ContentBox" value={{blogpost.text}}><br>
         <input type="Submit"><br>
     </form>
     <pre>*the password and the subject must not exceed 150 letters. 

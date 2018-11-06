@@ -8,7 +8,11 @@ urlpatterns = [
     path('read/<int:post_id>', views.Read, name='read'),
     path('update/<int:post_id>', views.Update, name='update'),
     path('delete/<int:post_id>', views.Delete, name='delete'),
-    path('delete/action/<int:post_id>', views.Delete_action, name="deleteAction"),
+    path('delete/action/<int:post_id>',
+         views.HandleDeleteQuery, name="handledeletequery"),
+    path('update/action/<int:post_id>',
+         views.HandleUpdateQuery, name="handleupdatequery"),
     path('nope/', views.four_oh_four, name='fourOhFour'),
+    path('write/render/', views.PostBlogpostQuery, name='postblogpostquery')
     # delete is to be implemented separately.
 ]
