@@ -3,16 +3,14 @@
     <title>Write a New Post</title>
 </head>
 <body>
-    <form method="POST" target={%url 'board:postblogpostquery'%}>
+    <form method="POST" action={%url 'board:postblogpostquery'%}>
         {%csrf_token%}
-        <p>Subject</p> <input type="text" name="subject" style="max-width:60%; display:block;"><br>
-        <p>Password</p> <input type="text" name="password" style="width:40%; display:inline;">
-        <p>Author</p> <input type="text" name="author" style="width:40%; display:inline;"><br>
-        <input type="text" name="content" style="max-width:80%,max_height:40%;height:300px;"><br>
-        <input type="Submit"><br>
+        <p>Subject</p> <input type="text" name="subject" style="max-width:80%; width:80%; display:block;" value=""><br>
+        <p>Password</p> <input type="text" name="password" style="width:80%;" value="">
+        <p>Author</p> <input type="text" name="author" style="width:80%;" value=""><br>
+        <input type="text" name="text" style="max-width:80%,max_height:40%;width:80%;height:300px;" value=""><br>
+        <input type="submit"><br>
     </form>
     <pre>*the password and the subject must not exceed 150 letters. 
           the author name must not exceed 50 letters. Thank you.</pre>
-
-
 </body>

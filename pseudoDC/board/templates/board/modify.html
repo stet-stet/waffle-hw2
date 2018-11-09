@@ -3,9 +3,8 @@
     <title>Modify a Post</title>
 </head>
 <body>
-
     <form action={%url 'board:handleupdatequery' blogpost.pk%} method="POST">
-        {%csrf_token%}s
+        {%csrf_token%}
         <p>Subject</p> <input type="text" name="subject" class="TitleBox" value={{blogpost.subject}}><br>
         <p>Password</p> <input type="text" name="password" class="SmallBox">
         <p>Author</p> <input type="text" name="author" class="SmallBox" value={{blogpost.author}}><br>

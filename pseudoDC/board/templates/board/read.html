@@ -12,8 +12,9 @@
         {{blogpost.text}}
         </p><br>
         <p>last modified : {{blogpost.last_modified}}</p>
-        <a href={%url 'board:update' blogpost.pk%}><button>Update</button></a>
+        <a href={%url 'board:verify' blogpost.pk%}><button>Update</button></a>
         <a href={%url 'board:delete' blogpost.pk%} target="0"><button>Delete</button></a>
+        <a href={%url 'board:index'%}><button>back to home</button></a>
     {%endif%}
-
+    
 </body>

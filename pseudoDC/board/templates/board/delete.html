@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<head><title>Delete this page?</title></head>
+<head>
+    <title>Delete this page?</title>
+    <meta charset="utf-8">
+</head>
 <body>
     {%if blogpost.private %}
         <p>this page is already private.</p>
     {%else%}
-    <form action={%url 'board:handledeletequery' blogpost.pk%}>
+    <form action={%url 'board:handledeletequery' blogpost.pk%} method="POST">
+        {%csrf_token%}
         <p>Please type the password to delete this post.</p>
         <input type="text" name="password">
         <input type="submit">

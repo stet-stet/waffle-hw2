@@ -13,6 +13,7 @@
             {%endif%}
         {%endfor%}
     {%else%}
-    <p>Nothing to show you!</p>
+    <p>No posts at all!</p>
     {%endif%}
+    <a href={%url 'board:write'%}><button>Write something New</button></a>
 </body>
