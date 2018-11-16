@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <head>
     <title>Modify a Post</title>
+    <style type="text/css">
+        .TitleBox{
+            max-width:80%; width:80%; display:block;
+        }
+        .SmallBox{
+            width:80%;
+        }
+        .ContentBox{
+            max-width:80%;max-height:40%;width:80%;height:300px;
+        }
+    </style>
 </head>
 <body>
-    <form action={%url 'board:handleupdatequery' blogpost.pk%} method="POST">
+    <form action={%url 'board:handleupdatequery' blogpost.pk%} method="POST" id="theform">
         {%csrf_token%}
         <p>Subject</p> <input type="text" name="subject" class="TitleBox" value={{blogpost.subject}}><br>
         <p>Password</p> <input type="text" name="password" class="SmallBox">
         <p>Author</p> <input type="text" name="author" class="SmallBox" value={{blogpost.author}}><br>
-        <input type="text" name="text" class="ContentBox" value={{blogpost.text}}><br>
+        <textarea name="text" form="theform" class="ContentBox"></textarea>
+        <br>
         <input type="Submit"><br>
     </form>
     <pre>*the password and the subject must not exceed 150 letters. 

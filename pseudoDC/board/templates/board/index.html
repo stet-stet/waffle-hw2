@@ -9,11 +9,16 @@
         <ul class="PostListing">
         {%for blogpost in BlogPostList%}
             {%if not blogpost.private%}
-                <li><a href={%url 'board:read' blogpost.pk %}>{{blogpost.subject}}</a></li>
+                <li><a onclick="ManualRedirect({%url 'board:read' blogpost.pk %})">{{blogpost.subject}}</a></li>
             {%endif%}
         {%endfor%}
     {%else%}
     <p>No posts at all!</p>
     {%endif%}
     <a href={%url 'board:write'%}><button>Write something New</button></a>
+    <script type="text/javascript">
+        function ManualRedirect(url){
+            window.location.href(url);
+        }
+    </script>
 </body>

@@ -1,20 +1,68 @@
 <!DOCTYPE html>
 <head>
     <title>pseudoDC: {{blogpost.subject}}</title>
+    <style type="text/css">
+        ol.PostListing li{
+            height: 20px;
+            margin-top: auto;
+            margin-left:10%;
+            margin-bottom:auto;
+        }
+        .breakline{
+            width:90%;
+            height:7px;
+            background-color:black;
+            margin-top:60px;
+            margin-bottom:60px;
+            margin-left:5%;
+            margin-right:5%;
+        }
+        .line{
+            width:80%;
+            height:1px;
+            background-color:black;
+            margin-top:7px;
+            margin-bottom:7px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        .entry{
+            margin-left:20%;
+            font-size:24px;
+        }
+    </style>
 </head>
 <body>
-    {%if blogpost.private%}
-        <p> This post has been turned private! <p>
-    {%else%}
-        <p>Subject : {{blogpost.subject}} </p><br>
-        <p>Author : {{blogpost.author}}</p><br>
-        <p>
-        {{blogpost.text}}
-        </p><br>
-        <p>last modified : {{blogpost.last_modified}}</p>
-        <a href={%url 'board:verify' blogpost.pk%}><button>Update</button></a>
-        <a href={%url 'board:delete' blogpost.pk%} target="0"><button>Delete</button></a>
-        <a href={%url 'board:index'%}><button>back to home</button></a>
+    {%if blogpost%}
+        {%if blogpost.private%}
+            <p> This post has been turned private! <p>
+        {%else%}
+            <p>Subject : {{blogpost.subject}} </p><br>
+            <p>Author : {{blogpost.author}}</p><br>
+            <pre>{{blogpost.text}}</pre><br>
+            <p>last modified : {{blogpost.last_modified}}</p>
+            <a href={%url 'board:verify' blogpost.pk%}><button>Update</button></a>
+            <a href={%url 'board:delete' blogpost.pk%} target="0"><button>Delete</button></a>
+            <a href={%url 'board:index'%}><button>back to home</button></a>
+        {%endif%}
     {%endif%}
     
+    <div class="breakline"></div>
+
+    {%if BlogPostList%}
+        <ol class="PostListing">
+        {%for blogpost in BlogPostList%}
+            {%if not blogpost.private%}
+                <div class="line"></div>
+                <li><a href={%url 'board:read' blogpost.pk %}>{{blogpost.subject}}</a></li>
+            {%endif%}
+        {%endfor%}
+    
+    <div class="line"></div>
+
+    <div class="breakline"></div>
+    {%else%}
+        <p>No posts at all!</p>
+    {%endif%}
+    <a href={%url 'board:write'%}><button>Write something New</button></a>
 </body>

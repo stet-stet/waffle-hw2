@@ -14,15 +14,13 @@ def four_oh_four(http_request):
 
 def Index(http_request):
     BList = get_list_or_404(BlogPost)
-    return render(http_request, 'board/index.html', {"BlogPostList": BList})
+    return render(http_request, 'board/read.html', {"BlogPostList": BList, "blogpost": None})
 
 
 def Read(http_request, post_id):
+    BList = get_list_or_404(BlogPost)
     B = get_object_or_404(BlogPost, pk=post_id)
-    if B.private is True:
-        return four_oh_four(http_request)
-    else:
-        return render(http_request, 'board/read.html', {"blogpost": B})
+    return render(http_request, 'board/read.html', {"BlogPostList": BList, "blogpost": B})
 
 
 def Write(http_request):
@@ -50,17 +48,20 @@ def Delete(http_request, post_id):
 
 
 def PostBlogpostQuery(http_request):
-    B = BlogPost(
-        subject=http_request.POST['subject'],
-        text=http_request.POST['text'],
-        password=http_request.POST['password'],
-        author=http_request.POST['author'],
-        pub_date=timezone.now(),
-        last_modified=timezone.now(),
-        private=False
-    )
-    B.save()
-    return HttpResponseRedirect(reverse('board:read', args=(B.pk,)))
+    if http_request.POST['subject']:
+        B = BlogPost(
+            subject=http_request.POST['subject'],
+            text=http_request.POST['text'],
+            password=http_request.POST['password'],
+            author=http_request.POST['author'],
+            pub_date=timezone.now(),
+            last_modified=timezone.now(),
+            private=False
+        )
+        B.save()
+        return HttpResponseRedirect(reverse('board:read', args=(B.pk,)))
+    else:
+        return HttpResponseRedirect(reverse('board:index'))
 
 
 def HandleVerifyQuery(http_request, post_id):
